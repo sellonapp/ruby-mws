@@ -43,7 +43,8 @@ module MWS
         params[:version]           ||= '2009-01-01'
 
         params[:lists] ||= {}
-        params[:lists][:marketplace_id] ||= "MarketplaceId.Id" unless params[:marketplace_id]
+        params[:lists][:marketplace_id]   ||= "MarketplaceId.Id" unless params[:marketplace_id]
+        params[:lists][:report_type_list] ||= "_GET_FLAT_FILE_OPEN_LISTINGS_DATA_"
 
         query = Query.new params
         @response = Response.parse self.class.send(params[:verb], query.request_uri), name, params
