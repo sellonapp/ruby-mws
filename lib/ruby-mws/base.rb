@@ -21,7 +21,7 @@ module MWS
     end
 
     def reports
-      @product ||= MWS::API::Report.new(@connection)
+      @report ||= MWS::API::Report.new(@connection)
     end
 
 
