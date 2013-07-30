@@ -51,7 +51,7 @@ module MWS
         if @response.respond_to?(:next_token) and @next[:token] = @response.next_token  # modifying, not comparing
           @next[:action] = name.match(/_by_next_token/) ? name : "#{name}_by_next_token"
         end
-        if @response.parsed_response.is_a?(String)
+        if !@response.is_a?(Array) and @response.parsed_response.is_a?(String)
           @response = CSV.generate({col_sep: "\t"}) do |csv|
             @response.parsed_response.split(/\r\n/).each do |row|
               csv << row.split(/\t/)
