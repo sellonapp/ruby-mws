@@ -17,6 +17,13 @@ module MWS
           :report_type_list => "ReportTypeList.Type"
         },
         :report_type => "_GET_FLAT_FILE_OPEN_LISTINGS_DATA_"
+
+      def_request [:get_report],
+        :verb => :get,
+        :uri => '/',
+        :version => '2009-01-01',
+        :report_id => "11894259273"
+        
     end
   end
 end

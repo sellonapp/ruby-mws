@@ -20,10 +20,17 @@ describe MWS::API::Product do
     end
 
     describe "get_report_request_list" do
-      it "should receive a list of products for id" do
+      it "should receive a report of request list" do
         response = @mws.reports.get_report_request_list :last_updated_after => "2012-01-15T13:07:26-05:00" , :timestamp => @timestamp
         response.should be_an_instance_of MWS::API::Response
         response.report_request_info.last.should have_key :report_processing_status
+        @report_id = response.report_request_info.last.report_processing_status
+      end
+    end
+
+    describe "get_report_list" do
+      it "should receive a list reports" do
+        response = @mws.reports.get_report :last_updated_after => "2012-01-15T13:07:26-05:00" , :timestamp => @timestamp
       end
     end
 

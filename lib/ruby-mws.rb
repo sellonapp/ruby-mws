@@ -6,6 +6,7 @@ require 'openssl'
 # require 'hashie/mash'
 require 'hashie'
 require 'rash'
+require 'csv'
 
 module MWS
   def self.new(options={})

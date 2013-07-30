@@ -4,6 +4,7 @@ module MWS
     class Response < Hashie::Rash
       
       def self.parse(hash, name, params)
+        return hash if !hash.is_a?(Hash)
         rash = self.new(hash)
         handle_error_response(rash["error_response"]["error"]) unless rash["error_response"].nil?
         raise BadResponseError, "received non-matching response type #{rash.keys}" if rash["#{name}_response"].nil?

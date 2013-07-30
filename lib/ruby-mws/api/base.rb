@@ -7,9 +7,9 @@ module MWS
     class Base
       include HTTParty
       # debug_output $stderr  # only in development
-      format :xml
-      headers "User-Agent"   => "ruby-mws/#{MWS::VERSION} (Language=Ruby/1.9.3-p0)"
-      headers "Content-Type" => "text/xml"
+      # format :xml
+      # headers "User-Agent"   => "ruby-mws/#{MWS::VERSION} (Language=Ruby/1.9.3-p0)"
+      # headers "Content-Type" => "text/xml"
 
       attr_accessor :response
 
@@ -50,6 +50,13 @@ module MWS
         @response = Response.parse self.class.send(params[:verb], query.request_uri), name, params
         if @response.respond_to?(:next_token) and @next[:token] = @response.next_token  # modifying, not comparing
           @next[:action] = name.match(/_by_next_token/) ? name : "#{name}_by_next_token"
+        end
+        if @response.parsed_response.is_a?(String)
+          @response = CSV.generate({col_sep: "\t"}) do |csv|
+            @response.parsed_response.split(/\r\n/).each do |row|
+              csv << row.split(/\t/)
+            end
+          end
         end
         @response
       end
