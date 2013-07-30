@@ -5,7 +5,7 @@ describe MWS::API::Inventory do
   before :all do
     EphemeralResponse.activate
     @mws = MWS.new(auth_params)
-    @timestamp = "2012-04-25T21:42:11-04:00"
+    @timestamp = Time.now.utc.iso8601
   end
 
   context "requests" do

@@ -33,7 +33,9 @@ AWSAccessKeyId=#{default_params[:aws_access_key_id]}&Action=ListOrders&LastUpdat
       :signature_method   => "HmacSHA256",
       :signature_version  => "2",
       :timestamp          => "2012-01-14T15:48:55-05:00",
+      :marketplace_id     => "MarketplaceId",
       :lists              => {
+        :asin_list        => "ASINList.ASIN"
         :marketplace_id   => "MarketplaceId.Id"
       }
     }.merge(auth_params)
