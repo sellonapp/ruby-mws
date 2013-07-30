@@ -43,7 +43,7 @@ module MWS
         params[:version]           ||= '2009-01-01'
 
         params[:lists] ||= {}
-        params[:lists][:marketplace_id] = "MarketplaceId.Id"
+        params[:lists][:marketplace_id] ||= "MarketplaceId.Id" unless params[:marketplace_id]
 
         query = Query.new params
         @response = Response.parse self.class.send(params[:verb], query.request_uri), name, params
