@@ -5,6 +5,8 @@ module MWS
 
       def initialize(params)
         @params = params
+        params["ASIN"] = params.delete(:asin) if params[:asin]
+        params["SellerSKU"] = params.delete(:seller_sku) if params[:seller_sku]
         params[:lists].each do |field,label|
           [params.delete(field)].compact.flatten.each_with_index do |item,i|
             params["#{label}.#{i+1}"] = item
